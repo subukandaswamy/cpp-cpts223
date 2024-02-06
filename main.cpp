@@ -1,5 +1,6 @@
 #include <iostream>
 #include "IntStack.h"
+#include "TestStack.h"
 
 using namespace std;
 
@@ -13,5 +14,10 @@ int main()
     {
         cout << "popped: " << is.pop() << endl;
     }
+    cout << "\nTesting" << endl;
+    testPush();
+    testPeek();
+    testPop();
+    cout << "\n Test Completed" << endl;
     return 0;
 }
