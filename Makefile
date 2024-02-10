@@ -1,10 +1,10 @@
 all: clean compile execute
 
-compile: bigfive.cpp
-	g++ -g -Wall -std=c++14 bigfive.cpp -o bigfive
+compile: setsmaps.cpp
+	g++ -g -Wall -std=c++14 setsmaps.cpp -o setsmaps
 
-execute: bigfive
-	./bigfive
+execute: setsmaps
+	./setsmaps
 
 clean:
-	rm -f bigfive
+	rm -f setsmaps

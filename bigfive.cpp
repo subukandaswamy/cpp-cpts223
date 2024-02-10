@@ -133,6 +133,44 @@ public:
         }
         return temp;
     }
+    bool contains(int query)
+    {
+        for (int i = 0; i <= top; i++)
+        {
+            if (data_array[i] == query)
+                return true;
+        }
+        return false;
+    }
+};
+
+class MySet
+{
+private:
+    IntStack is;
+
+public:
+    void add(int data)
+    {
+        if (!contains(data))
+        {
+            is.push(data);
+        }
+        else
+        {
+            cout << "duplicate " << data << " not pushed" << endl;
+        }
+    }
+    bool contains(int data)
+    {
+        return is.contains(data);
+    }
+
+    friend ostream &operator<<(ostream &os, MySet &ms)
+    {
+        os << ms.is;
+        return os;
+    }
 };
 
 int main(int argc, char const *argv[])
@@ -171,22 +209,17 @@ int main(int argc, char const *argv[])
     //  4 5 6
     // +
     // 1 2 3 4 5 6
+    MySet ms;
 
-    IntStack is1;
-    is1.push(1);
-    is1.push(2);
-    is1.push(3);
+    ms.add(4);
+    ms.add(1);
+    ms.add(2);
+    ms.add(3);
+    ms.add(1);
+    ms.add(2);
+    ms.add(3);
 
-    IntStack is2;
-    is2.push(4);
-    is2.push(5);
-    is2.push(6);
-
-    IntStack is3;
-
-    is3 = is1 + is2;
-
-    cout << is3;
+    cout << ms;
 
     return 0;
 }
