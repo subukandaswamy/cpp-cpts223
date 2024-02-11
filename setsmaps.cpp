@@ -1,7 +1,27 @@
 #include <iostream>
 #include <set>
+#include <map>
 
 using namespace std;
+
+class GitCommit
+{
+public:
+    GitCommit(set<string> files_n) : files{files_n} {}
+    friend ostream &operator<<(ostream &os, const GitCommit &gc)
+    {
+        os << "|";
+        for (auto &f : gc.files)
+        {
+            os << f << ":";
+        }
+        os << "|";
+        return os;
+    }
+
+private:
+    set<string> files;
+};
 
 class AssignmentSubmission
 {
@@ -11,6 +31,8 @@ private:
     int version;
 
 public:
+    AssignmentSubmission(){};
+
     AssignmentSubmission(string sname, string asname, int version) : student_name{sname}, assignment_name{asname}, version{version} {}
 
     friend ostream &operator<<(ostream &os, const AssignmentSubmission &as)
@@ -58,5 +80,25 @@ int main(int argc, char const *argv[])
     aset.insert(AssignmentSubmission{"subu", "assign1", 1});
     aset.insert(AssignmentSubmission{"ananth", "assign1", 1});
     aset.insert(AssignmentSubmission{"subu", "assign1", 2});
-    cout << aset;
+    // cout << aset;
+
+    map<string, AssignmentSubmission> amap;
+    // amap["subu"] = AssignmentSubmission{"subu", "assign1", 1};
+    // amap.insert(pair<string, AssignmentSubmission>("subu", AssignmentSubmission{"subu", "assign1", 1}));
+    // amap.insert(pair<string, AssignmentSubmission>("ananth", AssignmentSubmission{"ananth", "assign1", 1}));
+
+    amap.emplace("subu", AssignmentSubmission{"subu", "assign1", 1});
+    amap.emplace("ananth", AssignmentSubmission{"subu", "assign1", 1});
+    amap["test"] = AssignmentSubmission("test", "test1", 2);
+
+    for (auto e = amap.begin(); e != amap.end(); e++)
+    {
+        cout << e->first << "==>" << e->second << endl;
+    }
+
+    // map<int, string> tmap;
+    // tmap[1] = "subu";
+    // tmap[2] = "ananth";
+    // cout << tmap[2];
+    cout << amap["test"];
 }
