@@ -101,4 +101,8 @@ int main(int argc, char const *argv[])
     // tmap[2] = "ananth";
     // cout << tmap[2];
     cout << amap["test"];
+    cout << amap["best"];
+
+    string text = "test test this this";
+    // build tokenizer later
 }
