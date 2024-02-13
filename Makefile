@@ -1,10 +1,10 @@
 out: clean compile execute
 
-compile: bigfive.cpp
-	g++ -g -Wall -std=c++14 bigfive.cpp -o bigfive
+compile: sets.cpp
+	g++ -g -Wall -std=c++14 sets.cpp -o sets
 
-execute: bigfive
-	./bigfive
+execute: sets
+	./sets
 
 clean:
-	rm -f bigfive
+	rm -f sets

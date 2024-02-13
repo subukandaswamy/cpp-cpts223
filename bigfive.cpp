@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <set>
 
 using namespace std;
 
@@ -89,37 +90,61 @@ public:
            << endl;
         return os;
     }
+    bool contains(int query)
+    {
+        for (int i = 0; i <= top; i++)
+        {
+            if (data_array[i] == query)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
+class IntSet
+{
+private:
+    IntStack is;
+
+public:
+    bool contains(int element)
+    {
+        return is.contains(element);
+    }
+    void add(int element)
+    {
+        if (!is.contains(element))
+            is.push(element);
+        else
+            cout << "duplicate -- not pushing" << endl;
+    }
+    friend ostream &operator<<(ostream &os, const IntSet &iset)
+    {
+        os << iset.is;
+        return os;
+    }
 };
 
 int main(int argc, char const *argv[])
 {
-    IntStack is;
-    is.push(1);
-    is.push(2);
-    is.push(3);
+    IntSet is;
+    is.add(1);
+    is.add(2);
+    is.add(3);
+    is.add(1);
+    is.add(2);
+    is.add(3);
+
     cout << is;
 
-    IntStack is1;
-    is1.push(4);
-    is1.push(5);
-    is1.push(6);
-    cout << is1;
+    set<int> iss{1, 2, 3};
 
-    IntStack is3;
-
-    is3 = is + is1;
-
-    // cout << is3;
-    //  cout << is.peek() << endl;
-    //  IntStack is1{is};
-    //  IntStack is2 = is;
-    //  IntStack is3;
-    //  is3 = is;
-    //  // is1 = is;
-    //  cout << is1.peek() << endl;
-    //  vector<IntStack> vec;
-    //  vec.push_back(IntStack());
-    //  vec.push_back(IntStack());
+    for (auto &x : iss)
+    {
+        cout << x << endl;
+    }
 
     return 0;
 }

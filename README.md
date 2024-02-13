@@ -4,7 +4,7 @@ Fixes to readme.
 
 ## Checklist
 
-- [ ] Set ADT
+- [x] Set ADT
 - [ ] Let's make us a Set
 - [ ] Sets and Maps
 
