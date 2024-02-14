@@ -1,5 +1,6 @@
 #include <iostream>
 #include <set>
+#include <map>
 
 using namespace std;
 
@@ -12,6 +13,10 @@ private:
 
 public:
     AssignmentSubmission() {}
+    string getName() const
+    {
+        return name;
+    }
     AssignmentSubmission(string n, string a, int v) : name{n}, assignmentName{a}, version{v} {}
 
     friend ostream &operator<<(ostream &os, const AssignmentSubmission &as)
@@ -21,7 +26,19 @@ public:
     }
     bool operator<(const AssignmentSubmission &rhs) const
     {
-        if (name.compare(rhs.name) < 0)
+        if (name.compare(rhs.name) > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+};
+class AssignmentNameCompare
+{
+public:
+    bool operator()(const AssignmentSubmission &lhs, const AssignmentSubmission &rhs) const
+    {
+        if (lhs.getName().compare(rhs.getName()) < 0)
         {
             return true;
         }
@@ -29,20 +46,56 @@ public:
     }
 };
 
+
+
+auto AssignmentCompareLambda = [](const AssignmentSubmission &lhs, const AssignmentSubmission &rhs) -> bool
+{
+    return lhs.getName().compare(rhs.getName()) < 0;
+};
+
 class AssignmentSet
 {
+private:
+    set<AssignmentSubmission, decltype(AssignmentCompareLambda)> aset{AssignmentCompareLambda};
+
+public:
+    void insert(AssignmentSubmission as)
+    {
+        auto res = aset.find(as);
+        if (res != aset.end())
+        {
+            aset.erase(res);
+        }
+        aset.insert(as);
+    }
+    friend ostream &operator<<(ostream &os, const AssignmentSet &assignSet)
+    {
+        for (auto &x : assignSet.aset)
+        {
+            os << x;
+        }
+        return os;
+    }
 };
 
 int main(int argc, char const *argv[])
 {
-    set<AssignmentSubmission> aset;
-    aset.insert(AssignmentSubmission{"subu", "assn1", 1});
-    aset.insert(AssignmentSubmission{"ananth", "assn1", 1});
-    aset.insert(AssignmentSubmission{"subu", "assn1", 2});
+    // AssignmentSet aset;
+    // aset.insert(AssignmentSubmission{"subu", "assn1", 1});
+    // aset.insert(AssignmentSubmission{"ananth", "assn1", 1});
+    // aset.insert(AssignmentSubmission{"subu", "assn1", 2});
 
-    for (auto &x : aset)
+    // cout << aset;
+
+    map<string, AssignmentSubmission> amap;
+    amap["subu"] = AssignmentSubmission{"subu", "assn1", 1};
+    amap.insert(pair<string, AssignmentSubmission>("ananth", AssignmentSubmission{"ananth", "assn1", 1}));
+    amap.emplace("michael", AssignmentSubmission{"michael", "PA2", 2});
+
+    for (auto &x : amap)
     {
-        cout << x;
+        cout << x.first << "==>" << x.second;
     }
+
     return 0;
 }
