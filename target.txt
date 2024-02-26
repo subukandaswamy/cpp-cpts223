@@ -1,0 +1,2 @@
+I will omit the many interesting details of the Linux terminal infrastructure here, as it could easily fill its own article. But most Linux users are at least peripherally aware that the kernel tends to identify both serial devices and terminals as TTYs, assigning them filesystem names in the form of /dev/tty*. Probably a lot of those people remember that this stands for teletype or perhaps teletypewriter, although in practice the term teleprinter is more common.
+

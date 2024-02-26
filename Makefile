@@ -1,10 +1,10 @@
 out: clean compile execute
 
-compile: sets.cpp
-	g++ -g -Wall -std=c++14 sets.cpp -o sets
+compile: usets.cpp
+	g++ -g -Wall -std=c++14 usets.cpp -o usets
 
-execute: sets
-	./sets
+execute: usets
+	./usets
 
 clean:
-	rm -f sets
+	rm -f usets
