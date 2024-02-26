@@ -1,0 +1,1 @@
+One thing many people can likely agree on is the design of the interface for python-requests is (mostly) intuitive and lends itself to rapid development, prototyping, and is very nice when working in a REPL. If you're unfamiliar, here are some examples
